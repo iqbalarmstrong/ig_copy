@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0px;
+          padding: 0px;
+          background-color: #f5f5f5;
+          padding: 20px;
+        }
+
+        .LoginPage {
+          max-width: 375px;
+          height: 700px;
+          margin: 0 auto;
+          background: white;
+          padding: 20px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          position: relative;
+          align-items: center;
+          background: white;
+        }
+
+        .DonTHaveAnAccoun {
+          left: 120px;
+          top: 615px;
+          position: absolute;
+          text-align: center;
+        }
+
+        .SeperatorOr {
+          width: 343px;
+          left: 16px;
+          top: 559.50px;
+          position: absolute;
+        }
+
+        .Or{
+          left: 180px;
+          top: 0px;
+          position:absolute;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.40);
+          font-size: 12px;
+          font-family: SF Pro Text;
+          font-weight: 600;
+          word-wrap: break-word;
+        }
+
+        .Line {
+          flex-grow: 1;
+          height: 1px;
+          background: rgba(0, 0, 0, 0.2);
+          margin: 0 10px;
+        }
+
+        @media (max-width: 375px) {
+          .SeperatorOr {
+              flex-direction: column;
+          }
+          .Line {
+            margin: 5px 0;
+            width: 50%;
+          }
+        }
+
+        .Form {
+          width: 400px;
+          height: 207px;
+          left: 16px;
+          top: 256px;
+          position: absolute
+        }
+
+        .Rectangle {
+          width: 343px;
+          height: 44px;
+          left: 20px;
+          top: 0px;
+          position: absolute;
+          text-align: calc(100px);
+          background: #FAFAFA;
+          border-radius: 5px;
+          border: 0.50px rgba(0, 0, 0, 0.10) solid;
+        }
+
+        .Username {
+          width: 343px;
+          height: 44px;
+          left: 0px;
+          top: 0px;
+          position: absolute;
+        }
+
+        .Password {
+          width: 343px;
+          height: 44px;
+          left: 0px;
+          top: 56px; 
+          position: absolute;
+        }
+
+        .Button {
+          width: 343px;
+          height: 44px;
+          left: 0px;
+          top: 163px;
+          position: absolute;
+          opacity: 0.50;
+        }
+
+        .ForgotPassword {
+          right: 40px;
+          top: 119px;
+          position: absolute;
+          text-align: right;
+          color: #3797EF;
+          font-size: 12px;
+          font-family: SF Pro Text;
+          font-weight: 500; 
+          letter-spacing: 0.15px;
+          word-wrap: break-word;
+        }
+
+        .Username .Username {
+          left: 30px;
+          top: 15px;
+          position: absolute;
+          opacity: 0.20;
+          color: black;
+          font-size: 14px;
+          font-family: SF Pro Text; 
+          font-weight: 400; 
+          word-wrap: break-word;
+        }
+
+        .Password .Password {
+          left: 30px;
+          top: 13.50px;
+          position: absolute; 
+          color: rgba(0, 0, 0, 0.20); 
+          font-size: 14px;
+          font-family: SF Pro Text;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .Button .Rectangle {
+          width: 343px;
+          height: 44px;
+          right: 40px;
+          top: 0px; 
+          position: absolute;
+          background: #3797EF;
+          border-radius: 5px;
+        }
+
+        .Button .LogIn {
+          left: 175px;
+          top: 14px;
+          position: absolute;
+          text-align: center;
+          color: white;
+          font-size: 14px; 
+          font-family: SF Pro Text; 
+          font-weight: 600;
+          word-wrap: break-word;
+        }
+
+        .TopBar .Shape{
+          width: 9.38px;
+          height: 17.47px;
+          left: 16.41px;
+          top: 56px;
+          position: absolute; 
+          background: #262626;
+        }
+
+        .ByBernard {
+          left: 175px;
+          top: 788px;
+          position: absolute;
+          text-align: center;
+          color: black;
+          font-size: 12px;
+          font-family: Odor Mean Chey;
+          word-wrap: break-word;
+          font-weight: bold;
+        }
+
+        .Igrams {
+          left: 80px;
+          top: 165px;
+          position: absolute;
+          text-align: center;
+          color: black;
+          font-size: 36px;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+          font-weight: 400;
+          text-transform: uppercase; 
+          word-wrap: break-word;
+          margin-left: 60px;
+        }
+
+        .Rectangle1 {
+          width: 410px; 
+          height: 30px;
+          left: 0px;
+          top: 787.50px;
+          position: absolute;
+          opacity: 0.50;
+          mix-blend-mode: darken;
+          background: #D9D9D9;
+        }
+
+        .Igs11 {
+          width: 108px;
+          height: 111px;
+          left: 145px;
+          top: 33px;
+          position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="LoginPage">
+        <div class="DonTHaveAnAccoun"><span style="color: rgba(0, 0, 0, 0.40); font-size: 14px; font-family: SF Pro Text; font-weight: 400; word-wrap: break-word">Don’t have an account? </span><span style="color: #3797EF; font-size: 14px; font-family: SF Pro Text; font-weight: 400; word-wrap: break-word">Sign up.</span></div>
+        <div class="SeperatorOr">
+          <div class="Or">OR</div>
+          <div class="Line" style="width: 132px; height: 1px; left: 0px; top: 6px; position: absolute; border: 0.33px rgba(0, 0, 0, 0.20) solid"></div>
+          <div class="Line" style="width: 132px; height: 1px; left: 225px; top: 6px; position: absolute; border: 0.33px rgba(0, 0, 0, 0.20) solid"></div>
+        </div>
+        <div class="Form">
+          <div class="ForgotPassword">Forgot password?</div>
+          <div class="Username">
+            <input type="text" class="Rectangle">
+            <div class="Username">Username</div>
+          </div>
+          <div class="Password">
+            <div class="Rectangle"></div>
+            <div class="Password">Password</div>
+          </div>
+          <div class="Button">
+            <div class="Rectangle"></div>
+            <div class="LogIn">Log in</div>
+          </div>
+        </div>
+        <img class="Igs11" url="width: 108px; height: 111px; left: 145px; top: 33px; position: absolute" src="C:\Users\User\OneDrive\Desktop\2024\PROCOD11\FLASK\MEET15\application\static\images\igs1.jpg"/>
+        <div class="ByBernard">By Bernard</div>
+        <div class="Igrams">Igrams</div>
+        <div class="Rectangle1"></div>
+      </div>
+</body>
+</html>
