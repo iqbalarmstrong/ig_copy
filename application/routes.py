@@ -9,7 +9,7 @@ from application.utils import save_image
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('profile', username=current_user.username))
+        return redirect(url_for('index'))
 
     form = LoginForm()
 
@@ -20,7 +20,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and password == user.password:
             login_user(user)
-            return redirect(url_for('profile', username=current_user.username))
+            return redirect(url_for('profile', username=username))
         else:
             flash('Invalid username or password', 'error')
 
@@ -32,16 +32,20 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# @app.route('/profile')
-# @login_required
-# def profile():
-#     return render_template('profile.html', title=f'{current_user.fullname} Profile')
-
 @app.route('/<string:username>')
 @login_required
 def profile(username):
-    return render_template('profile.html', title=f'{current_user.fullname} Profile')
-    
+    posts = current_user.posts
+    reverse_posts = posts[::-1]
+    return render_template('profile.html', title=f'{current_user.fullname} Profile', posts=reverse_posts)
+
+@app.route('/edit_profile',methods=['GET','POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        pass
+    return render_template('edit_profile.html', form=form)
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
@@ -56,10 +60,10 @@ def index():
         post.photo = save_image(form.post_pic.data)
         db.session.add(post)
         db.session.commit()
-        flash('Your Image has been posted 📮!', 'success')
+        flash('Your image has been posted 🩷!', 'success')
 
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.filter_by(author_id = current_user.id).order_by(Post.post_date.desc()).paginate(page= page, per_page =3)
+    posts = Post.query.filter_by(author_id = current_user.id).order_by(Post.post_date.desc()).paginate(page=page, per_page=3)
 
     return render_template('index.html', title='Home', form=form, posts=posts)
 
@@ -68,13 +72,7 @@ def signup():
     form = SignUpForm()
     return render_template('signup.html', title='SignUp', form=form)
 
-# @app.route('/editprofile')
-# def editprofile():
-#     form = EditProfileForm()
-#     return render_template('editprofile.html', title='EditProfile')
-
 @app.route('/about')
-@login_required
 def about():
     return render_template('about.html', title='About')
 
