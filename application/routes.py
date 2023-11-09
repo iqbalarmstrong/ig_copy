@@ -1,7 +1,9 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash
 
-from application import app
+
+from application import app, db
 from application.models import *
 from application.forms import *
 from application.utils import save_image
@@ -45,7 +47,7 @@ def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         pass
-    return render_template('edit_profile.html', form=form)
+    return render_template('edit_profile.html',title='Edit Profile', form=form)
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
@@ -67,9 +69,25 @@ def index():
 
     return render_template('index.html', title='Home', form=form, posts=posts)
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET','POST'])
 def signup():
     form = SignUpForm()
+    if form.validate_on_submit():
+        user = User(
+            username=form.username.data,
+            fullname=form.fullname.data,
+            email=form.email.data,
+            password=form.password.data
+        )
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('login'))  
+        except Exception as e:
+            db.session.rollback()
+            print(f"An error occurred: {str(e)}")
+   
     return render_template('signup.html', title='SignUp', form=form)
 
 @app.route('/about')

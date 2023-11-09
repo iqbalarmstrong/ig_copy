@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="">
+
     <div class="container" style="border: 1px black s;">
         <h1>edit_profile</h1>
-        {{ form.hidden_tag() }}
+            {{ form.hidden_tag() }}
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 {{ form.profile_pic.label(class="form-control-label") }}
@@ -26,5 +26,4 @@
         </form>
     </div>
 
-</div>
 {% endblock content %}
