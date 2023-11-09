@@ -15,6 +15,7 @@
             <p>{{ current_user.bio }}</p>
             <p>Following: {{ current_user.following_users|length }}</p>
             <p>Follower: {{ current_user.follower_users|length }}</p>
+            <a class="btn btn-primary" href="{{url_for('edit_profile')}}">edit_profile</a>
         </div>
     </div>
 

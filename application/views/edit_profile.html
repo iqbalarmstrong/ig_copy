@@ -1,29 +1,75 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<div class="">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="">
+            <legend class="">Daftar</legend>
 
-    <div class="container" style="border: 1px black s;">
-        <h1>edit_profile</h1>
-            {{ form.hidden_tag() }}
-        <form method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                {{ form.profile_pic.label(class="form-control-label") }}
-                {{ form.profile_pic(class="form-control-file") }}
+            <div class="">
+                {{ form.username.label(class="") }}
+
+                {% if form.username.errors%}
+                    {{ form.username(class="") }}
+                    <div class="">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="form-control ") }}
+                {% endif %}
+
+            </div>
+
+            <div class="">
+                {{ form.fullname.label(class="") }}
+
+                {% if form.fullname.errors%}
+                    {{ form.fullname(class="") }}
+                    <div class="">
+                        {% for error in form.fullname.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.fullname(class="form-control ") }}
+                {% endif %}
+
+            </div>
+            
+            <div class="">
+                {{ form.bio.label(class="") }}
+                
+                {% if form.bio.errors%}
+                    {{ form.bio(class="") }}
+                    <div class="">
+                        {% for error in form.bio.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.bio(class="form-control ") }}
+                {% endif %}
+
+            </div>
+            <div class="">
+                {{form.profile_pic(class="")}}
+                
                 {% for error in form.profile_pic.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
             </div>
-            <div class="form-group">
-                {{ form.bio.label(class="form-control-label") }}
-                {{ form.bio(class="form-control-file") }}
-                {% for error in form.bio.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-primary")}}
-            </div>
-        </form>
-    </div>
+        </fieldset>
+        <div class="">
+            {{ form.submit(class="btn btn-outline-info") }}
+            <small class="">
+                <a href="{{ url_for('login') }}"></a>
+            </small>
+        </div>
+        
 
+    </form>
+</div>
 {% endblock content %}
