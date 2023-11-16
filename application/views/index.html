@@ -28,11 +28,35 @@
     <div class="post-container">
         {% for post in posts %}
             <div class="post" style="border: 1px black solid; margin: 10px  0px;">
-                <img src="{{ url_for('static', filename='' + post.photo) }}" alt="Post Image">
+                <div class="post-header">
+                    <img src="{{ url_for('static', filename='iamges/' + post.posts_owner.profile_pic) }}" alt="post owner" style="  height: 30px; width:30px; border-radius: 50%; ">
+                    <h2>{{post.posts_owner.username}}</h2>
+                </div>
+                <img src="{{ url_for('static', filename='images/' + post.photo) }}" alt="Post Image">
                 <p>{{ post.caption }} </p>
+                <div class="post-footer">
+                    <span id="likeBtn" data-post-id="{{post,id}}">❤️</span><span id="likeCounter">{{post.likes| length}}</span>
+                    <span id="likeBtn" data-post-id="{{post.id}}">💬</span><span id="commentCounter">{{post.comments| length}}</span>
+                </div>
             </div>
         {% endfor %}
     </div>
+    <script>
+        document.querySelectorAll("#liked").forEach(btn =>{
+            btn.addEventListener('click', function(){
+                const xhr = new XMLHttpRequest();
+                xhr.open(`POST`,`/like/${this.dataset.postId}`, true);
+                xhr.setRequestHeader(`Content-type`, `application/json;charset=UTF-8`);
+
+                xhr.onload = function(){
+                    if (xhr.status ===200){
+                        const renspone = JSON.parse(xhr.responseText)
+                        console.log(respone.status)
+                    }
+                }
+            })
+        })
+    </script>
     <div class="pagination-box">
         {% for page_number in posts.iter_pages() %}
             {% if page_number == posts.page %}

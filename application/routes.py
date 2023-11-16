@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, make_response, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash
 
@@ -55,6 +55,8 @@ def edit_profile():
         user.bio = form.bio.data
         
         if form.profile_pic.data:
+            uploaded_file = form.profile_pic.data   
+            
             pass
         db.session.commit()
         flash('profile update', "success")
@@ -110,6 +112,17 @@ def signup():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
-
+@app.route('/like/<int:post_id>', methods=['POST'])
+@login_required
+def like(post_id):
+    like -Like.query.fillter_by(user_id=current_user.id, post_id =post_id).first()
+    if not like:
+        like = Like(user_id =current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+        return make_response(200,jsonify({"status":True}))
+    db.session.remove(like)
+    db.session.commit()
+    return make_response(200, jsonify({"status":False}))
 if __name__ == '__main__':
     app.run(debug=True)
