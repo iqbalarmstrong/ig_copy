@@ -28,6 +28,10 @@ def login():
 
     return render_template('login.html', title="Login", form=form)
 
+@app.route('/forget_password', methods=['GET','POST'])
+def forgot_pass():
+    form = ForgotPasswordForm()
+    return render_template('forget_pass.html', titlee="forget_pass", form=form)    
 @app.route('/logout')
 @login_required
 def logout():
@@ -55,8 +59,6 @@ def edit_profile():
         user.bio = form.bio.data
         
         if form.profile_pic.data:
-            uploaded_file = form.profile_pic.data   
-            
             pass
         db.session.commit()
         flash('profile update', "success")
@@ -112,17 +114,21 @@ def signup():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
-@app.route('/like/<int:post_id>', methods=['POST'])
+@app.route('/like', methods=['GET', 'POST'])
 @login_required
-def like(post_id):
-    like -Like.query.fillter_by(user_id=current_user.id, post_id =post_id).first()
+def like():
+    data = request.json
+    post_id = int(data['postId'])
+    like = Like.query.filter_by(user_id=current_user.id,post_id=post_id).first()
     if not like:
-        like = Like(user_id =current_user.id, post_id=post_id)
+        like = Like(user_id=current_user.id, post_id=post_id)
         db.session.add(like)
         db.session.commit()
-        return make_response(200,jsonify({"status":True}))
-    db.session.remove(like)
+        return make_response(jsonify({"status" : True}), 200)
+    
+    db.session.delete(like)
     db.session.commit()
-    return make_response(200, jsonify({"status":False}))
+    return make_response(jsonify({"status" : False}), 200)
+
 if __name__ == '__main__':
     app.run(debug=True)
